@@ -1,12 +1,12 @@
 import { getRepository } from 'typeorm';
 import { Request, Response } from 'express';
-import Users from '../models/User';
+import User from '../models/User';
 import usersView from '../views/user_view';
 
 export default {
 
   async index(request: Request, response: Response): Promise<any> {
-    const userRepository = getRepository(Users);
+    const userRepository = getRepository(User);
 
     const users = await userRepository.find();
 
@@ -14,9 +14,19 @@ export default {
   },
 
   async create(request: Request, response: Response): Promise<Response> {
-    const userRepository = getRepository(Users);
+    const userRepository = getRepository(User);
 
     const { name, email } = request.body;
+
+    const userAlreadyExists = await userRepository.findOne({
+      email
+    })
+
+    if (userAlreadyExists) {
+      return response.status(400).json({
+        error: "Email já cadastrado."
+      })
+    }
 
     const userCreated = userRepository.create({ name, email });
 

@@ -1,7 +1,7 @@
-import Users from '../models/User';
+import User from '../models/User';
 
 export default {
-  render(user: Users) {
+  render(user: User) {
     return {
       id: user.id,
       name: user.name,
@@ -10,7 +10,7 @@ export default {
     }
   },
 
-  renderMany(users: Users[]) {
+  renderMany(users: User[]) {
     return users.map(user => this.render(user));
   }
 }
