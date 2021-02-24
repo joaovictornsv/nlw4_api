@@ -1,16 +1,16 @@
 import express from 'express';
 import UserController from './controllers/UserController'
-import { celebrate, Joi, Segments } from 'celebrate';
-import { errors } from '../src/config/celebrate.config';
+import { celebrate, Joi, Segments, errors } from 'celebrate';
+import { errorsMessages } from '@config/celebrate.config';
 
 const router = express.Router();
-
 router.get('/users', UserController.index);
 router.post('/users',celebrate({
   [Segments.BODY]: Joi.object().keys({
-    name: Joi.string().min(3).required().messages(errors),
-    email: Joi.string().email().required().messages(errors)
+    name: Joi.string().min(3).required().messages(errorsMessages),
+    email: Joi.string().email().required().messages(errorsMessages)
   })
 }), UserController.create);
+router.use(errors())
 
 export default router;
