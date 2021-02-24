@@ -6,6 +6,7 @@ import './database';
 import MiddlewareException from '../src/errors/MiddlewareException';
 
 const app = express();
+
 app.use(express.json());
 app.use(router);
 app.use(MiddlewareException);
