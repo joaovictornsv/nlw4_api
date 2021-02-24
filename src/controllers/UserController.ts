@@ -3,14 +3,14 @@ import usersView from '../views/user_view';
 import ListUserService from '../services/ListUserService';
 import CreateUserService from '../services/CreateUserService';
 
-export default {
+class UserController {
   async index(request: Request, response: Response): Promise<any> {
     const listUserService = new ListUserService;
-    
+
     const users = await listUserService.execute();
 
     return response.json(usersView.renderMany(users));
-  },
+  }
 
   async create(request: Request, response: Response): Promise<Response> {
     const createUserService = new CreateUserService;
@@ -21,3 +21,5 @@ export default {
 
   }
 }
+
+export { UserController }
