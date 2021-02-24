@@ -11,6 +11,5 @@ router.post('/users',celebrate({
     email: Joi.string().email().required().messages(errorsMessages)
   })
 }), UserController.create);
-router.use(errors())
 
 export default router;

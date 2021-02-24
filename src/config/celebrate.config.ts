@@ -1,4 +1,8 @@
 export const errorsMessages = {
-  'string.min': 'Nome deve ter no mínimo 3 caracteres',
-  'string.email': 'Email inválido'
+  'string.base': `deve ser do tipo 'text'`,
+  'string.empty': `não pode ser um campo vazio`,
+  'string.min': `deve ter no minimo {#limit} caracteres`,
+  'string.max': `deve ter no maximo {#limit} caracteres`,
+  'string.uuid': `deve ser do tipo uuid valido`,
+  'any.required': `é um campo obrigatório`
 };
