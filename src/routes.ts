@@ -1,10 +1,10 @@
-import { Router } from 'express';
-import UserRouter from '../src/routers/UserRouter';
-import SurveysRouter from './routers/SurveysRouter';
+import { Router } from 'express'
+import UserRouter from '../src/routers/UserRouter'
+import SurveysRouter from './routers/SurveysRouter'
 
-const router = Router();
+const router = Router()
 
-router.use('/users', UserRouter);
-router.use('/surveys', SurveysRouter);
+router.use('/users', UserRouter)
+router.use('/surveys', SurveysRouter)
 
-export default router;
+export default router

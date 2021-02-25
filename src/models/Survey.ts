@@ -1,6 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm'
 
-@Entity("surveys")
+@Entity('surveys')
 export default class Survey {
   @PrimaryGeneratedColumn('uuid')
   readonly id: string;

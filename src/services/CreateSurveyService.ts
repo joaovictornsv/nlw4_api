@@ -1,6 +1,6 @@
-import Survey from "src/models/Survey";
-import { SurveysRepository } from "src/repositories/SurveysRepository";
-import { getCustomRepository } from "typeorm";
+import Survey from 'src/models/Survey'
+import { SurveysRepository } from 'src/repositories/SurveysRepository'
+import { getCustomRepository } from 'typeorm'
 
 interface SurveyRequest {
   title: string;
@@ -8,16 +8,16 @@ interface SurveyRequest {
 }
 
 export default class CreateSurveyService {
-  async execute({
+  async execute ({
     title,
     description
   }: SurveyRequest): Promise<Survey> {
-    const surveysRepository = getCustomRepository(SurveysRepository);
+    const surveysRepository = getCustomRepository(SurveysRepository)
 
-    const surveyCreated = surveysRepository.create({ title, description });
+    const surveyCreated = surveysRepository.create({ title, description })
 
-    await surveysRepository.save(surveyCreated);
+    await surveysRepository.save(surveyCreated)
 
-    return surveyCreated;
+    return surveyCreated
   }
 }

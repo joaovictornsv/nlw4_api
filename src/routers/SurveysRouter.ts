@@ -1,11 +1,11 @@
-import { errorsMessages } from '@config/celebrate.config';
-import { celebrate, Joi, Segments } from 'celebrate';
-import { Router } from 'express';
-import { SurveyController } from 'src/controllers/SurveyController';
+import { errorsMessages } from '@config/celebrate.config'
+import { celebrate, Joi, Segments } from 'celebrate'
+import { Router } from 'express'
+import { SurveyController } from 'src/controllers/SurveyController'
 
-const routes = Router();
+const routes = Router()
 
-const surveyController = new SurveyController;
+const surveyController = new SurveyController()
 
 routes.get('/', surveyController.index)
 
@@ -14,8 +14,8 @@ routes.post('/', celebrate({
     title: Joi.string().min(3).required().messages(errorsMessages),
     description: Joi.string().required().messages(errorsMessages)
   })
-  }),
- surveyController.create
-);
+}),
+surveyController.create
+)
 
-export default routes;
+export default routes

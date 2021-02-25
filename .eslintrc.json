@@ -4,10 +4,7 @@
     "node": true
   },
   "extends": [
-    "eslint:recommended",
-    "plugin:prettier/recommended",
-    "prettier/@typescript-eslint",
-    "plugin:@typescript-eslint/recommended"
+    "standard"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -15,11 +12,9 @@
     "sourceType": "module"
   },
   "plugins": [
-    "prettier",
     "@typescript-eslint"
   ],
-  "ignorePatterns": "build",
   "rules": {
-    "prettier/prettier": "error"
+    "camelcase": "off"
   }
 }

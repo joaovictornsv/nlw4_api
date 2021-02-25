@@ -1,8 +1,8 @@
 
-import { getCustomRepository } from 'typeorm';
-import { UserRepository } from '../repositories/UserRepository';
-import User from '../models/User';
-import HttpException from 'src/errors/HttpException';
+import { getCustomRepository } from 'typeorm'
+import { UserRepository } from '../repositories/UserRepository'
+import User from '../models/User'
+import HttpException from 'src/errors/HttpException'
 
 interface UserRequest {
   name: string;
@@ -14,20 +14,20 @@ export default class ListUsersService {
     name,
     email
   }: UserRequest): Promise<User> {
-    const userRepository = getCustomRepository(UserRepository);
+    const userRepository = getCustomRepository(UserRepository)
 
     const userAlreadyExists = await userRepository.findOne({
       email
     })
 
     if (userAlreadyExists) {
-      throw new HttpException('Email já cadastrado.');
+      throw new HttpException('Email já cadastrado.')
     }
 
-    const userCreated = userRepository.create({ name, email });
+    const userCreated = userRepository.create({ name, email })
 
-    await userRepository.save(userCreated);
+    await userRepository.save(userCreated)
 
-    return userCreated;
+    return userCreated
   }
 }
