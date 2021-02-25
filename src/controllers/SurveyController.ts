@@ -4,7 +4,7 @@ import { ListSurveyService } from '../services/ListSurveyService'
 import surveyView from '../views/survey_view'
 
 class SurveyController {
-  async index (response: Response): Promise<Response> {
+  async index (request: Request, response: Response): Promise<Response> {
     const listSurveyService = new ListSurveyService()
 
     const surveys = await listSurveyService.execute()
