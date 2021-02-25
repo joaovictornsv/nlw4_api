@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import CreateSurveyService from "src/services/CreateSurveyService";
-import { ListSurveyService } from "src/services/ListSurveyService";
-import surveyView from '../views/survey_view';
+import CreateSurveyService from "src/services/CreateSurveyService"
+import { ListSurveyService } from "src/services/ListSurveyService"
+import surveyView from "../views/survey_view"
 
 class SurveyController {
-  async index(request: Request, response: Response) {
+  async index(response: Response): Promise<Response> {
     const listSurveyService = new ListSurveyService;
 
     const surveys = await listSurveyService.execute();
@@ -13,7 +13,7 @@ class SurveyController {
 
   }
 
-  async create(request: Request, response: Response) {
+  async create(request: Request, response: Response): Promise<Response> {
     const createSurveyService = new CreateSurveyService;
 
     const surveyCreated = await createSurveyService.execute(request.body);
