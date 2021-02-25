@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
-import CreateSurveyService from 'src/services/CreateSurveyService'
-import { ListSurveyService } from 'src/services/ListSurveyService'
+import CreateSurveyService from '../services/CreateSurveyService'
+import { ListSurveyService } from '../services/ListSurveyService'
 import surveyView from '../views/survey_view'
 
 class SurveyController {
@@ -17,7 +17,7 @@ class SurveyController {
 
     const surveyCreated = await createSurveyService.execute(request.body)
 
-    return response.json(surveyView.render(surveyCreated))
+    return response.status(201).json(surveyView.render(surveyCreated))
   }
 }
 
