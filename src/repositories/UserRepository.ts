@@ -3,4 +3,6 @@ import User from '../models/User';
 
 
 @EntityRepository(User)
-export default class userRepository extends Repository<User> {}
+class UserRepository extends Repository<User> {}
+
+export { UserRepository }

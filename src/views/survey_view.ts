@@ -8,5 +8,9 @@ export default {
       description: survey.description,
       created_at: survey.created_at
     }
+  },
+
+  renderMany(surveys : Survey[]) {
+    return surveys.map(survey => this.render(survey));
   }
 }

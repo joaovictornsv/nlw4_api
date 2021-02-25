@@ -1,8 +1,18 @@
 import { Request, Response } from "express";
 import CreateSurveyService from "src/services/CreateSurveyService";
+import { ListSurveyService } from "src/services/ListSurveyService";
 import surveyView from '../views/survey_view';
 
 class SurveyController {
+  async index(request: Request, response: Response) {
+    const listSurveyService = new ListSurveyService;
+
+    const surveys = await listSurveyService.execute();
+
+    return response.status(200).json(surveyView.renderMany(surveys));
+
+  }
+
   async create(request: Request, response: Response) {
     const createSurveyService = new CreateSurveyService;
 

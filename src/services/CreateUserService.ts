@@ -1,6 +1,6 @@
 
 import { getCustomRepository } from 'typeorm';
-import UserRepository from '../repositories/UserRepository';
+import { UserRepository } from '../repositories/UserRepository';
 import User from '../models/User';
 import HttpException from 'src/errors/HttpException';
 
@@ -11,7 +11,7 @@ interface UserRequest {
 
 export default class ListUsersService {
   async execute ({
-    name, 
+    name,
     email
   }: UserRequest): Promise<User> {
     const userRepository = getCustomRepository(UserRepository);

@@ -1,5 +1,5 @@
 import Survey from "src/models/Survey";
-import SurveyRepository from "src/repositories/SurveyRepository";
+import { SurveysRepository } from "src/repositories/SurveysRepository";
 import { getCustomRepository } from "typeorm";
 
 interface SurveyRequest {
@@ -12,11 +12,11 @@ export default class CreateSurveyService {
     title,
     description
   }: SurveyRequest): Promise<Survey> {
-    const surveyRepository = getCustomRepository(SurveyRepository);
+    const surveysRepository = getCustomRepository(SurveysRepository);
 
-    const surveyCreated = surveyRepository.create({ title, description });
+    const surveyCreated = surveysRepository.create({ title, description });
 
-    await surveyRepository.save(surveyCreated);
+    await surveysRepository.save(surveyCreated);
 
     return surveyCreated;
   }
