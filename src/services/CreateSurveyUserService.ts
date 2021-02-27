@@ -10,8 +10,14 @@ interface MailBodyRequest {
   survey_id: string;
 }
 
+interface SurveyUserDataProps {
+  surveyUser: SurveyUser,
+  surveyTitle: string,
+  surveyDescription: string
+}
+
 class CreateSurveyUserService {
-  async execute ({ email, survey_id }: MailBodyRequest): Promise<SurveyUser> {
+  async execute ({ email, survey_id }: MailBodyRequest): Promise<SurveyUserDataProps> {
     const userRepository = getCustomRepository(UserRepository)
     const surveysRepository = getCustomRepository(SurveysRepository)
     const surveysUserRepository = getCustomRepository(SurveysUsersRepository)
@@ -35,7 +41,13 @@ class CreateSurveyUserService {
 
     await surveysUserRepository.save(surveyUserCreated)
 
-    return surveyUserCreated
+    const SurveyUserData = {
+      surveyUser: surveyUserCreated,
+      surveyTitle: surveyAlreadyExists.title,
+      surveyDescription: surveyAlreadyExists.description
+    }
+
+    return SurveyUserData
   }
 }
 export { CreateSurveyUserService }
