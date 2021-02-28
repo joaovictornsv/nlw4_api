@@ -8,8 +8,6 @@ class SendMailService {
   constructor () {
     nodemailer.createTestAccount()
       .then((account: nodemailer.TestAccount) => {
-        console.log('Credentials obtained, sending message...')
-
         const transporter = nodemailer.createTransport({
           host: account.smtp.host,
           port: account.smtp.port,

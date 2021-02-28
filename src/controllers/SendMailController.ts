@@ -2,11 +2,11 @@ import { Request, Response } from 'express'
 import { CreateSurveyUserService } from '../services/CreateSurveyUserService'
 import SendMailService from '../services/SendEmailService'
 import { resolve } from 'path'
-import { SurveysUsersRepository } from 'src/repositories/SurveysUsersRepository'
+import { SurveysUsersRepository } from '../repositories/SurveysUsersRepository'
 import { getCustomRepository } from 'typeorm'
-import { UserRepository } from 'src/repositories/UserRepository'
-import HttpException from 'src/errors/HttpException'
-import { SurveysRepository } from 'src/repositories/SurveysRepository'
+import { UserRepository } from '../repositories/UserRepository'
+import HttpException from '../errors/HttpException'
+import { SurveysRepository } from '../repositories/SurveysRepository'
 
 interface RequestBody extends Request {
   body: {
