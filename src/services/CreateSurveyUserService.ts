@@ -10,15 +10,8 @@ interface MailBodyRequest {
   survey_id: string;
 }
 
-interface SurveyUserDataProps {
-  surveyUser: SurveyUser,
-  userName: string,
-  surveyTitle: string,
-  surveyDescription: string
-}
-
 class CreateSurveyUserService {
-  async execute ({ email, survey_id }: MailBodyRequest): Promise<SurveyUserDataProps> {
+  async execute ({ email, survey_id }: MailBodyRequest): Promise<SurveyUser> {
     const userRepository = getCustomRepository(UserRepository)
     const surveysRepository = getCustomRepository(SurveysRepository)
     const surveysUserRepository = getCustomRepository(SurveysUsersRepository)
@@ -29,27 +22,14 @@ class CreateSurveyUserService {
       throw new HttpException('User does not exists')
     }
 
-    const survey = await surveysRepository.findOne({ id: survey_id })
-
-    if (!survey) {
-      throw new HttpException('Survey does not exists')
-    }
-
-    const surveyUserCreated = await surveysUserRepository.create({
+    const surveyUserCreated = surveysUserRepository.create({
       user_id: user.id,
       survey_id
     })
 
     await surveysUserRepository.save(surveyUserCreated)
 
-    const SurveyUserData = {
-      surveyUser: surveyUserCreated,
-      userName: user.name,
-      surveyTitle: survey.title,
-      surveyDescription: survey.description
-    }
-
-    return SurveyUserData
+    return surveyUserCreated
   }
 }
 export { CreateSurveyUserService }

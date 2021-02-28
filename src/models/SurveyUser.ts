@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, OneToOne } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, ManyToOne, JoinColumn } from 'typeorm'
 import Survey from './Survey'
 import User from './User'
 
@@ -8,12 +8,18 @@ class SurveyUser {
   readonly id: string;
 
   @Column()
-  @OneToOne(type => User, { cascade: true })
   user_id: string;
 
+  @ManyToOne(() => User)
+  @JoinColumn({ name: 'user_id' })
+  user: User;
+
   @Column()
-  @OneToOne(type => Survey, { cascade: true })
   survey_id: string;
+
+  @ManyToOne(() => Survey)
+  @JoinColumn({ name: 'survey_id' })
+  survey: Survey;
 
   @Column()
   value: number;
