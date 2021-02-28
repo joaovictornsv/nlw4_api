@@ -1,6 +1,7 @@
 import { Request, Response } from 'express'
 import { CreateSurveyUserService } from '../services/CreateSurveyUserService'
 import SendMailService from '../services/SendEmailService'
+import { resolve } from 'path'
 
 interface RequestBody extends Request {
   body: {
@@ -15,9 +16,22 @@ class SendMailController {
 
     const createSurveyUserService = new CreateSurveyUserService()
 
-    const { surveyUser, surveyTitle, surveyDescription } = await createSurveyUserService.execute({ email, survey_id })
+    const {
+      surveyUser,
+      userName: name,
+      surveyTitle: title,
+      surveyDescription: description
+    } = await createSurveyUserService.execute({ email, survey_id })
 
-    await SendMailService.execute(email, surveyTitle, surveyDescription)
+    const npsPath = resolve(__dirname, '..', 'views', 'emails', 'npsMail.hbs')
+
+    const mailVariables = {
+      name,
+      title,
+      description
+    }
+
+    await SendMailService.execute(email, title, mailVariables, npsPath)
 
     return response.status(201).json(surveyUser)
   }

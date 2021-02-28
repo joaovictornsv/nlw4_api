@@ -1,4 +1,35 @@
 <style>
+  .container {
+    width: 800px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column;
+  }
+
+  .value {
+    padding: 10px;
+    background: #8257e6;
+    color: #FFF;
+    border-radius: 6px;
+    width: 15px;
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .level {
+    display: flex;
+    margin: 10px;
+    justify-content: space-between;
+    width: 400px;
+  }
+
+  .answers {
+    width: 400px;
+    justify-content: space-between;
+    display: flex;
+  }
 
 </style>
 
@@ -8,6 +39,11 @@
   <h3>{{title}}</h3>
   <br/>
   <strong>{{description}}</strong>
+
+  <div class="level">
+    <span>Pouco provável</span>
+    <span>Muito provável</span>
+  </div>
 
   <div class="answers">
     <a class="value" href="">1</a>

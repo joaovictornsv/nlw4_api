@@ -12,6 +12,7 @@ interface MailBodyRequest {
 
 interface SurveyUserDataProps {
   surveyUser: SurveyUser,
+  userName: string,
   surveyTitle: string,
   surveyDescription: string
 }
@@ -22,20 +23,20 @@ class CreateSurveyUserService {
     const surveysRepository = getCustomRepository(SurveysRepository)
     const surveysUserRepository = getCustomRepository(SurveysUsersRepository)
 
-    const userAlreadyExists = await userRepository.findOne({ email })
+    const user = await userRepository.findOne({ email })
 
-    if (!userAlreadyExists) {
+    if (!user) {
       throw new HttpException('User does not exists')
     }
 
-    const surveyAlreadyExists = await surveysRepository.findOne({ id: survey_id })
+    const survey = await surveysRepository.findOne({ id: survey_id })
 
-    if (!surveyAlreadyExists) {
+    if (!survey) {
       throw new HttpException('Survey does not exists')
     }
 
     const surveyUserCreated = await surveysUserRepository.create({
-      user_id: userAlreadyExists.id,
+      user_id: user.id,
       survey_id
     })
 
@@ -43,8 +44,9 @@ class CreateSurveyUserService {
 
     const SurveyUserData = {
       surveyUser: surveyUserCreated,
-      surveyTitle: surveyAlreadyExists.title,
-      surveyDescription: surveyAlreadyExists.description
+      userName: user.name,
+      surveyTitle: survey.title,
+      surveyDescription: survey.description
     }
 
     return SurveyUserData
