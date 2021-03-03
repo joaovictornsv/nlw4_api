@@ -3,7 +3,7 @@ import { CreateSurveyUserService } from '@services/CreateSurveyUserService'
 import SendMailService from '@services/SendMailService'
 import { resolve } from 'path'
 import { SurveysUsersRepository } from '@repositories/SurveysUsersRepository'
-import { getCustomRepository } from 'typeorm'
+import { getCustomRepository, MoreThanOrEqual } from 'typeorm'
 import { UserRepository } from '@repositories/UserRepository'
 import HttpException from '../errors/HttpException'
 import { SurveysRepository } from '@repositories/SurveysRepository'
@@ -42,6 +42,10 @@ class SendMailController {
       relations: ['user', 'survey']
     })
 
+    const surveyHasBeenAnswered = await surveyUserRepository.findOne({
+      where: { user_id: user.id, survey_id: survey.id, value: MoreThanOrEqual(0) }
+    })
+
     //
     // Variables to send mail
     const link = process.env.URL_MAIL || 'http://localhost:3333/answers'
@@ -55,6 +59,10 @@ class SendMailController {
     }
 
     const npsPath = resolve(__dirname, '..', 'views', 'emails', 'npsMail.hbs')
+
+    if (surveyHasBeenAnswered) {
+      throw new HttpException('This survey has been answered')
+    }
 
     //
     // If the user and the search are related, an email will be sent with the last searchy

@@ -3,7 +3,7 @@ import { Request, Response } from 'express'
 import { getCustomRepository } from 'typeorm'
 
 class NpsCalcService {
-  async execute (request: Request, response: Response) {
+  async execute (request: Request, response?: Response) {
     const { survey_id } = request.params
 
     const surveysUserRepository = getCustomRepository(SurveysUsersRepository)
@@ -15,7 +15,7 @@ class NpsCalcService {
     ).length
 
     const detractors = surveysUsers.filter(
-      (survey) => survey.value >= 0 || survey.value <= 6
+      (survey) => survey.value >= 0 && survey.value <= 6
     ).length
 
     const passives = surveysUsers.filter(
@@ -27,7 +27,7 @@ class NpsCalcService {
     const score = (promoters - detractors) / totalAnswers * 100
 
     return {
-      score,
+      nps: score,
       totalAnswers,
       promoters,
       passives,
