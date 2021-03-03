@@ -1,5 +1,5 @@
-import Survey from '../models/Survey'
-import { SurveysRepository } from '../repositories/SurveysRepository'
+import Survey from '@models/Survey'
+import { SurveysRepository } from '@repositories/SurveysRepository'
 import { getCustomRepository } from 'typeorm'
 
 interface SurveyRequest {

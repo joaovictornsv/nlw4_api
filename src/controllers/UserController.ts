@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
-import usersView from '../views/user_view'
-import ListUserService from '../services/ListUserService'
-import CreateUserService from '../services/CreateUserService'
+import usersView from '@views/user_view'
+import ListUserService from '@services/ListUserService'
+import CreateUserService from '@services/CreateUserService'
 
 class UserController {
   async index (request: Request, response: Response): Promise<any> {

@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
-import CreateSurveyService from '../services/CreateSurveyService'
-import { ListSurveyService } from '../services/ListSurveyService'
-import surveyView from '../views/survey_view'
+import CreateSurveyService from '@services/CreateSurveyService'
+import { ListSurveyService } from '@services/ListSurveyService'
+import surveyView from '@views/survey_view'
 
 class SurveyController {
   async index (request: Request, response: Response): Promise<Response> {

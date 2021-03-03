@@ -1,7 +1,7 @@
 
 import { getCustomRepository } from 'typeorm'
-import { UserRepository } from '../repositories/UserRepository'
-import User from '../models/User'
+import { UserRepository } from '@repositories/UserRepository'
+import User from '@models/User'
 import HttpException from '../errors/HttpException'
 
 interface UserRequest {

@@ -1,7 +1,7 @@
 import { Router } from 'express'
-import UserRouter from '../src/routers/UserRouter'
-import SurveysRouter from './routers/SurveysRouter'
-import SurveysUsersRouter from './routers/SurveysUsersRouter'
+import UserRouter from '@routers/UserRouter'
+import SurveysRouter from '@routers/SurveysRouter'
+import SurveysUsersRouter from '@routers/SurveysUsersRouter'
 
 const router = Router()
 

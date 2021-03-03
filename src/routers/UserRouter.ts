@@ -1,7 +1,7 @@
-import { errorsMessages } from '../config/celebrate.config'
+import { errorsMessages } from '@config/celebrate.config'
 import { celebrate, Joi, Segments } from 'celebrate'
 import { Router } from 'express'
-import { UserController } from '../controllers/UserController'
+import { UserController } from '@controllers/UserController'
 
 const routes = Router()
 

@@ -1,9 +1,9 @@
 import HttpException from '../errors/HttpException'
 import { getCustomRepository } from 'typeorm'
-import { UserRepository } from '../repositories/UserRepository'
-import { SurveysRepository } from '../repositories/SurveysRepository'
-import { SurveysUsersRepository } from '../repositories/SurveysUsersRepository'
-import { SurveyUser } from '../models/SurveyUser'
+import { UserRepository } from '@repositories/UserRepository'
+import { SurveysRepository } from '@repositories/SurveysRepository'
+import { SurveysUsersRepository } from '@repositories/SurveysUsersRepository'
+import { SurveyUser } from '@models/SurveyUser'
 
 interface MailBodyRequest {
   email: string;
