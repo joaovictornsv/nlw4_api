@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { SurveyController } from '@controllers/SurveyController'
-import SurveyValidator from 'src/validators/SurveyValidator'
+import surveyValidator from 'src/validators/surveyValidator'
 
 const routes = Router()
 
@@ -8,6 +8,6 @@ const surveyController = new SurveyController()
 
 routes.get('/', surveyController.index)
 
-routes.post('/', SurveyValidator, surveyController.create)
+routes.post('/', surveyValidator, surveyController.create)
 
 export default routes
