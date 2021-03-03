@@ -1,7 +1,6 @@
 import HttpException from '../errors/HttpException'
 import { getCustomRepository } from 'typeorm'
 import { UserRepository } from '@repositories/UserRepository'
-import { SurveysRepository } from '@repositories/SurveysRepository'
 import { SurveysUsersRepository } from '@repositories/SurveysUsersRepository'
 import { SurveyUser } from '@models/SurveyUser'
 
@@ -13,7 +12,6 @@ interface MailBodyRequest {
 class CreateSurveyUserService {
   async execute ({ email, survey_id }: MailBodyRequest): Promise<SurveyUser> {
     const userRepository = getCustomRepository(UserRepository)
-    const surveysRepository = getCustomRepository(SurveysRepository)
     const surveysUserRepository = getCustomRepository(SurveysUsersRepository)
 
     const user = await userRepository.findOne({ email })

@@ -7,6 +7,6 @@ const router = Router()
 
 router.use('/users', UserRouter)
 router.use('/surveys', SurveysRouter)
-router.use('/send', SurveysUsersRouter)
+router.use('/', SurveysUsersRouter)
 
 export default router

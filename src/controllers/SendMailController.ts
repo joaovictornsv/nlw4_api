@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import { CreateSurveyUserService } from '@services/CreateSurveyUserService'
-import SendMailService from '@services/SendEmailService'
+import SendMailService from '@services/SendMailService'
 import { resolve } from 'path'
 import { SurveysUsersRepository } from '@repositories/SurveysUsersRepository'
 import { getCustomRepository } from 'typeorm'
@@ -38,7 +38,7 @@ class SendMailController {
     //
     // Check if the user and the search are related
     const surveyUserAlreadyExists = await surveyUserRepository.findOne({
-      where: [{ user_id: user.id }, { value: null }],
+      where: { user_id: user.id, value: null },
       relations: ['user', 'survey']
     })
 
@@ -51,7 +51,7 @@ class SendMailController {
       title: survey.title,
       description: survey.description,
       link,
-      user_id: user.id
+      id: ''
     }
 
     const npsPath = resolve(__dirname, '..', 'views', 'emails', 'npsMail.hbs')
@@ -59,6 +59,7 @@ class SendMailController {
     //
     // If the user and the search are related, an email will be sent with the last searchy
     if (surveyUserAlreadyExists) {
+      mailVariables.id = surveyUserAlreadyExists.id
       await SendMailService.execute(email, survey.title, mailVariables, npsPath)
       return response.json(surveyUserAlreadyExists)
     }
@@ -69,6 +70,7 @@ class SendMailController {
 
     const surveyUser = await createSurveyUserService.execute({ email, survey_id })
 
+    mailVariables.id = surveyUser.id
     await SendMailService.execute(email, survey.title, mailVariables, npsPath)
 
     return response.status(201).json(surveyUser)
