@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "tsnd -r tsconfig-paths/register --respawn --transpile-only --ignore-watch node_modules --no-notify src/server.ts",
     "typeorm": "tsnd node_modules/typeorm/cli.js",
-    "test": "NODE_ENV=test jest -i",
-    "posttest": "rm ./src/database/database.test.sqlite"
+    "test": "NODE_ENV=test jest -i --verbose"
   },
   "dependencies": {
     "celebrate": "^13.0.4",

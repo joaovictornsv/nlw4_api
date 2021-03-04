@@ -1,6 +1,6 @@
 import { Router } from 'express'
 import { SurveyController } from '@controllers/SurveyController'
-import surveyValidator from 'src/validators/surveyValidator'
+import surveyValidator from '../validators/surveyValidator'
 
 const routes = Router()
 

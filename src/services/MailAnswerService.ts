@@ -1,6 +1,6 @@
 import { SurveysUsersRepository } from '@repositories/SurveysUsersRepository'
 import HttpException from '../errors/HttpException'
-import { getCustomRepository, MoreThanOrEqual } from 'typeorm'
+import { getCustomRepository, IsNull, Not } from 'typeorm'
 import { SurveyUser } from '@models/SurveyUser'
 
 class MailAnswerService {
@@ -16,7 +16,7 @@ class MailAnswerService {
     }
 
     const surveyUserHasBeenAnswered = await surveysUserRepository.findOne({
-      where: { id: String(id), value: MoreThanOrEqual(0) }
+      where: { id: String(id), value: Not(IsNull) }
     })
 
     if (surveyUserHasBeenAnswered) {

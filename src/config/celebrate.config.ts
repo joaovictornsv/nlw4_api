@@ -1,5 +1,6 @@
 export const errorsMessages = {
   'string.base': 'deve ser do tipo \'text\'',
+  'string.email': 'deve ser do tipo email',
   'string.empty': 'não pode ser um campo vazio',
   'string.min': 'deve ter no minimo {#limit} caracteres',
   'string.max': 'deve ter no maximo {#limit} caracteres',

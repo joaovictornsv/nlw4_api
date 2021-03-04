@@ -3,7 +3,7 @@ import { CreateSurveyUserService } from '@services/CreateSurveyUserService'
 import SendMailService from '@services/SendMailService'
 import { resolve } from 'path'
 import { SurveysUsersRepository } from '@repositories/SurveysUsersRepository'
-import { getCustomRepository, MoreThanOrEqual } from 'typeorm'
+import { getCustomRepository, IsNull, Not } from 'typeorm'
 import { UserRepository } from '@repositories/UserRepository'
 import HttpException from '../errors/HttpException'
 import { SurveysRepository } from '@repositories/SurveysRepository'
@@ -38,12 +38,12 @@ class SendMailController {
     //
     // Check if the user and the search are related
     const surveyUserAlreadyExists = await surveyUserRepository.findOne({
-      where: { user_id: user.id, value: null },
+      where: { user_id: user.id, survey_id: survey.id, value: null },
       relations: ['user', 'survey']
     })
 
     const surveyHasBeenAnswered = await surveyUserRepository.findOne({
-      where: { user_id: user.id, survey_id: survey.id, value: MoreThanOrEqual(0) }
+      where: { user_id: user.id, survey_id: survey.id, value: Not(IsNull()) }
     })
 
     //
