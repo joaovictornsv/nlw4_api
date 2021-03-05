@@ -40,7 +40,7 @@ class NpsCalcService {
     if (score < 0) { status = statusMessages.bad } else
     if (score < 50) { status = statusMessages.reasonable } else
     if (score < 75) { status = statusMessages.great } else
-    if (score < 100) { status = statusMessages.excellent }
+    if (score <= 100) { status = statusMessages.excellent }
 
     return {
       nps: score,
